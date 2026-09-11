@@ -1,6 +1,6 @@
-# Cartucho ↔ Home Assistant protocol V1
+# Cartridge ↔ Home Assistant protocol V1
 
-A ROM não fala HTTP, JSON, TLS ou MQTT. O MCU do cartucho faz isso e entrega à ROM um snapshot compacto.
+The ROM does not speak HTTP, JSON, TLS, or MQTT. The cartridge MCU handles that and delivers a compact snapshot to the ROM.
 
 ## Entity record
 
@@ -9,7 +9,7 @@ u8  domain
 u8  state_code
 u8  features
 u8  name_len
-u16 numeric_value_x100   ; 0xFFFF = sem valor
+u16 numeric_value_x100   ; 0xFFFF = no value
 u8  name[name_len]
 ```
 
@@ -25,4 +25,4 @@ Feature bits: bit0 on/off, bit1 brightness, bit2 open/close, bit3 lock/unlock, b
 
 `01 SET_ON_OFF`, `02 SET_OPEN_CLOSE`, `03 SET_VALUE`, `04 REQUEST_REFRESH`.
 
-A UI nunca assume que existe uma luz ou porta. A lista é a única fonte para renderização.
+The UI never assumes that a light or door exists. The list is the sole source for rendering.

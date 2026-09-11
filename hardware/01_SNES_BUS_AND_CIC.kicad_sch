@@ -2,19 +2,1725 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid "1d5795bc-0c04-4ee1-aed1-9e5356915cff")
+	(uuid "2cf6d4f8-86ff-4627-b85c-3cb22e9faab8")
 	(paper "A3")
 	(title_block
 		(title "SNES 62-Pin Cartridge Connector & SuperCIC")
-		(date "2026-09-10")
+		(date "2026-09-11")
 		(rev "V1.0")
 		(company "SNES SmartHome Project")
 	)
-
-	(text "SHEET 1: SNES 62-PIN CARTRIDGE CONNECTOR & SUPERCIC\n\nPinout Specifications:\n- Pitch: 2.50mm Metric Pitch (DO NOT USE 2.54mm!)\n- PCB Thickness: 1.20mm ENIG with 30-degree Beveling\n\nSignals:\n- Power: Pins 27, 58 = +5V_SNES, Pins 5, 36 = GND\n- Data: Pins 19-22 = SNES_D0..SNES_D3, Pins 50-53 = SNES_D4..SNES_D7\n- Address: Pins 17..6 = SNES_A0..SNES_A11, Pins 37..40 = SNES_A12..SNES_A15\n- Bank Address: Pins 41..48 = SNES_A16..SNES_A23\n- Control: Pin 23 = /RD, Pin 54 = /WR, Pin 49 = /ROMSEL (/CART), Pin 26 = /RESET, Pin 57 = PHI2, Pin 18 = /IRQ\n\nLockout Bypass:\n- U1: PIC12F629-I/SN running open-source SuperCIC firmware\n  Pin 1: VDD (+5V_SNES), Pin 8: GND\n  Pin 3: CIC_CLK (Edge Pin 56)\n  Pin 4: CIC_RST (Edge Pin 25)\n  Pin 5: CIC_DAT1 (Edge Pin 24)\n  Pin 6: CIC_DAT2 (Edge Pin 55)\n  Pin 7: Mode/Status LED / Region select\n\nDecoupling & Protection:\n- C1: 100nF 0603 X7R on U1 VDD\n- D1, D2: SRV05-4 / USBLC6 TVS protection diode arrays on data & control bus"
-		(at 30 30 0)
-		(effects (font (size 2.2 2.2)) (justify left top))
-		(uuid "3967f9f6-6a90-491b-aef8-61712043baf4")
+	(lib_symbols
+		(symbol "Custom:SNES_62PIN"
+			(pin_names (offset 1.016))
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "P1" (at 0 -48 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "SNES_EDGE_62" (at 0 48 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(pin bidirectional line
+				(at -30.48 -38.1 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "1"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -35.6 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "2"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -33.1 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "3"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -30.6 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "4"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin power_in line
+				(at -30.48 -28.1 0)
+				(length 2.54)
+				(name "GND"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "5"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -25.6 0)
+				(length 2.54)
+				(name "SNES_A0"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "6"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -23.1 0)
+				(length 2.54)
+				(name "SNES_A1"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "7"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -20.6 0)
+				(length 2.54)
+				(name "SNES_A2"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "8"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -18.1 0)
+				(length 2.54)
+				(name "SNES_A3"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "9"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -15.600000000000001 0)
+				(length 2.54)
+				(name "SNES_A4"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "10"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -13.100000000000001 0)
+				(length 2.54)
+				(name "SNES_A5"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "11"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -10.600000000000001 0)
+				(length 2.54)
+				(name "SNES_A6"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "12"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -8.100000000000001 0)
+				(length 2.54)
+				(name "SNES_A7"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "13"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -5.600000000000001 0)
+				(length 2.54)
+				(name "SNES_A8"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "14"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -3.1000000000000014 0)
+				(length 2.54)
+				(name "SNES_A9"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "15"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 -0.6000000000000014 0)
+				(length 2.54)
+				(name "SNES_A10"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "16"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 1.8999999999999986 0)
+				(length 2.54)
+				(name "SNES_A11"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "17"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 4.399999999999999 0)
+				(length 2.54)
+				(name "/IRQ"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "18"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 6.899999999999999 0)
+				(length 2.54)
+				(name "SNES_D0"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "19"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 9.399999999999999 0)
+				(length 2.54)
+				(name "SNES_D1"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "20"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 11.899999999999999 0)
+				(length 2.54)
+				(name "SNES_D2"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "21"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 14.399999999999999 0)
+				(length 2.54)
+				(name "SNES_D3"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "22"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 16.9 0)
+				(length 2.54)
+				(name "/RD"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "23"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 19.4 0)
+				(length 2.54)
+				(name "CIC_DAT1"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "24"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 21.9 0)
+				(length 2.54)
+				(name "CIC_RST"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "25"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 24.4 0)
+				(length 2.54)
+				(name "/RESET"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "26"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin power_in line
+				(at -30.48 26.9 0)
+				(length 2.54)
+				(name "+5V_SNES"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "27"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 29.4 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "28"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 31.9 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "29"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 34.4 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "30"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -30.48 36.9 0)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "31"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -38.1 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "32"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -35.6 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "33"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -33.1 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "34"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -30.6 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "35"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin power_in line
+				(at 30.48 -28.1 180)
+				(length 2.54)
+				(name "GND"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "36"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -25.6 180)
+				(length 2.54)
+				(name "SNES_A12"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "37"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -23.1 180)
+				(length 2.54)
+				(name "SNES_A13"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "38"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -20.6 180)
+				(length 2.54)
+				(name "SNES_A14"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "39"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -18.1 180)
+				(length 2.54)
+				(name "SNES_A15"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "40"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -15.600000000000001 180)
+				(length 2.54)
+				(name "SNES_A16"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "41"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -13.100000000000001 180)
+				(length 2.54)
+				(name "SNES_A17"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "42"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -10.600000000000001 180)
+				(length 2.54)
+				(name "SNES_A18"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "43"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -8.100000000000001 180)
+				(length 2.54)
+				(name "SNES_A19"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "44"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -5.600000000000001 180)
+				(length 2.54)
+				(name "SNES_A20"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "45"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -3.1000000000000014 180)
+				(length 2.54)
+				(name "SNES_A21"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "46"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 -0.6000000000000014 180)
+				(length 2.54)
+				(name "SNES_A22"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "47"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 1.8999999999999986 180)
+				(length 2.54)
+				(name "SNES_A23"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "48"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 4.399999999999999 180)
+				(length 2.54)
+				(name "/ROMSEL"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "49"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 6.899999999999999 180)
+				(length 2.54)
+				(name "SNES_D4"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "50"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 9.399999999999999 180)
+				(length 2.54)
+				(name "SNES_D5"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "51"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 11.899999999999999 180)
+				(length 2.54)
+				(name "SNES_D6"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "52"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 14.399999999999999 180)
+				(length 2.54)
+				(name "SNES_D7"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "53"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 16.9 180)
+				(length 2.54)
+				(name "/WR"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "54"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 19.4 180)
+				(length 2.54)
+				(name "CIC_DAT2"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "55"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 21.9 180)
+				(length 2.54)
+				(name "CIC_CLK"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "56"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 24.4 180)
+				(length 2.54)
+				(name "PHI2"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "57"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin power_in line
+				(at 30.48 26.9 180)
+				(length 2.54)
+				(name "+5V_SNES"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "58"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 29.4 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "59"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 31.9 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "60"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 34.4 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "61"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at 30.48 36.9 180)
+				(length 2.54)
+				(name "NC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "62"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+		)
+		(symbol "MCU_Microchip_PIC:PIC12F629"
+			(pin_names (offset 1.016))
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U" (at 0 -14 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "PIC12F629" (at 0 14 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(pin power_in line
+				(at 0 10.16 270)
+				(length 2.54)
+				(name "VDD"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "1"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -10.16 5.08 0)
+				(length 2.54)
+				(name "RA5"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "2"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin bidirectional line
+				(at -10.16 2.54 0)
+				(length 2.54)
+				(name "RA4"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "3"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin input line
+				(at -10.16 0 0)
+				(length 2.54)
+				(name "RA3/MCLR"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "4"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin output line
+				(at -10.16 -2.54 0)
+				(length 2.54)
+				(name "RA2"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "5"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin passive line
+				(at -10.16 -5.08 0)
+				(length 2.54)
+				(name "RA1"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "6"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin passive line
+				(at -10.16 -7.62 0)
+				(length 2.54)
+				(name "RA0"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "7"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin power_in line
+				(at 0 -10.16 90)
+				(length 2.54)
+				(name "VSS"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "8"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+		)
+		(symbol "Custom:USBLC6-2SC6"
+			(pin_names (offset 1.016))
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D" (at 0 -7 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "USBLC6-2SC6" (at 0 7 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(pin power_in line
+				(at -7.62 2.54 0)
+				(length 2.54)
+				(name "GND"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "1"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin passive line
+				(at -7.62 0 0)
+				(length 2.54)
+				(name "I/O1"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "2"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin power_in line
+				(at 7.62 2.54 180)
+				(length 2.54)
+				(name "VCC"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "3"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin passive line
+				(at -7.62 -2.54 0)
+				(length 2.54)
+				(name "I/O2"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "4"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin passive line
+				(at 7.62 0 180)
+				(length 2.54)
+				(name "I/O3"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "5"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+			(pin passive line
+				(at 7.62 -2.54 180)
+				(length 2.54)
+				(name "I/O4"
+					(effects (font (size 1.27 1.27)))
+				)
+				(number "6"
+					(effects (font (size 1.27 1.27)))
+				)
+			)
+		)
+		(symbol "Device:C"
+			(pin_names (offset 0.254))
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C" (at 0.635 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "C" (at 0.635 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(symbol "C_0_1"
+				(polyline (pts (xy -1.524 0.508) (xy 1.524 0.508))
+					(stroke (width 0.3048) (type default))
+				)
+				(polyline (pts (xy -1.524 -0.508) (xy 1.524 -0.508))
+					(stroke (width 0.3048) (type default))
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+		)
 	)
-
+	(symbol
+		(lib_id "Custom:SNES_62PIN")
+		(at 80 155 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dbe73019-d056-43df-b471-ca5331d771c8")
+		(property "Reference" "P1" (at 80 157.54 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "SNES_EDGE_62" (at 80 152.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Connector_CardEdge:SNES_CartridgeEdge_62Pin_2.50mm" (at 80 155 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+		(property "LCSC" "Custom" (at 80 155 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+	)
+	(symbol
+		(lib_id "MCU_Microchip_PIC:PIC12F629")
+		(at 230 145 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec1a5923-f72a-49c0-bc3c-bf6818875598")
+		(property "Reference" "U1" (at 230 147.54 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "PIC12F629-I/SN" (at 230 142.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" (at 230 145 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+		(property "LCSC" "C20967" (at 230 145 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+	)
+	(symbol
+		(lib_id "Custom:USBLC6-2SC6")
+		(at 150 90 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3c9ae77e-26e5-4248-88d5-665b44bb18b2")
+		(property "Reference" "D1" (at 150 92.54 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "USBLC6-2SC6" (at 150 87.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering" (at 150 90 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+		(property "LCSC" "C7519" (at 150 90 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+	)
+	(symbol
+		(lib_id "Custom:USBLC6-2SC6")
+		(at 150 170 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6633f7ca-dac6-473e-be57-c8c0c7c5d69d")
+		(property "Reference" "D2" (at 150 172.54 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "USBLC6-2SC6" (at 150 167.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering" (at 150 170 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+		(property "LCSC" "C7519" (at 150 170 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 255 145 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0440c024-fb9e-46ba-a043-3107343a2e8c")
+		(property "Reference" "C5" (at 255 147.54 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100nF" (at 255 142.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 255 145 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+		(property "LCSC" "C14663" (at 255 145 0)
+			(effects (font (size 1.27 1.27)) hide)
+		)
+	)
+	(power_port "+5V_SNES"
+		(at 80 78.78 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "8bb26943-6c8f-412c-8cbe-0223765dd0b3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(power_port "GND"
+		(at 80 134.32 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ee08f547-014f-49c9-85e7-4df2618dcfbb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(power_port "+5V_SNES"
+		(at 110.48 78.78 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "77a3339f-b689-470d-aeb6-3777cdc11df6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(power_port "GND"
+		(at 110.48 134.32 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "31d130a5-fabf-4021-9421-265dabad7110")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 230 134.84) (xy 230 130))
+		(stroke (width 0) (type default))
+		(uuid "4ad3b167-599b-44f4-be8f-0701a9026b6b")
+	)
+	(power_port "+3V3"
+		(at 230 128 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "23c5d30c-ef0b-4976-a2a8-b969faf8d298")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 230 155.16) (xy 230 160))
+		(stroke (width 0) (type default))
+		(uuid "d9637190-d6e6-4750-8572-ecb25a49f540")
+	)
+	(power_port "GND"
+		(at 230 162 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "73f416e4-6adb-4283-9e5c-c1b51b1339a8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 255 141.19) (xy 255 137))
+		(stroke (width 0) (type default))
+		(uuid "3f3cab2d-fe9a-4863-8bd8-0a388cc27ec5")
+	)
+	(power_port "+3V3"
+		(at 255 135 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "909e6837-93c9-4749-b8ce-f449e8097622")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 255 148.81) (xy 255 152))
+		(stroke (width 0) (type default))
+		(uuid "c7812266-1b2f-4a98-b42d-be0eea54d936")
+	)
+	(power_port "GND"
+		(at 255 154 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "21c021a8-d0cf-4762-adc1-1767779a76cf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 157.62 87.46) (xy 163 87.46))
+		(stroke (width 0) (type default))
+		(uuid "9c3ee71d-323a-42a7-ace0-1e69da3d6832")
+	)
+	(power_port "+5V_SNES"
+		(at 165 87.46 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "85eed281-6a28-4e9e-9d0c-abca29a7f796")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 142.38 87.46) (xy 139 87.46))
+		(stroke (width 0) (type default))
+		(uuid "f193a014-e3cf-43a7-bdbb-fcbb8cde788a")
+	)
+	(power_port "GND"
+		(at 137 87.46 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "9d12700e-f28f-4aca-b3c3-573133659f1e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 157.62 167.46) (xy 163 167.46))
+		(stroke (width 0) (type default))
+		(uuid "f2df1f2e-bf1b-43ad-82a3-b24cf5bd1604")
+	)
+	(power_port "+5V_SNES"
+		(at 165 167.46 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "387937b5-2fc0-4e04-a33f-0a3c59f5b26b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 142.38 167.46) (xy 139 167.46))
+		(stroke (width 0) (type default))
+		(uuid "5482cf83-1c97-4923-8c80-a13613334a99")
+	)
+	(power_port "GND"
+		(at 137 167.46 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "2d3de82e-92ef-48b5-b129-424af09cac1a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 0 0 0) (effects (font (size 1.27 1.27)) hide))
+	)
+	(wire (pts (xy 110.48 43.82) (xy 120 43.82))
+		(stroke (width 0) (type default))
+		(uuid "70e5a856-9224-4dbc-a74e-74a637c98e66")
+	)
+	(label "CIC_CLK"
+		(at 120 43.82 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "21b93ab3-cae6-4cf1-ac3d-b904d06d0254")
+	)
+	(wire (pts (xy 110.48 81.32) (xy 120 81.32))
+		(stroke (width 0) (type default))
+		(uuid "693b745c-4d99-4bdf-bd98-787daf39b545")
+	)
+	(label "CIC_RST"
+		(at 120 81.32 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "d701860d-7def-4ea9-b280-bef8a9720547")
+	)
+	(wire (pts (xy 110.48 83.82) (xy 120 83.82))
+		(stroke (width 0) (type default))
+		(uuid "260ef7ed-7cc2-40d3-b0ef-2f6f103c0aee")
+	)
+	(label "CIC_DAT1"
+		(at 120 83.82 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "b0e08a4e-6a6e-4e9d-9ba8-db0898db5101")
+	)
+	(wire (pts (xy 110.48 46.32) (xy 120 46.32))
+		(stroke (width 0) (type default))
+		(uuid "bcc74613-33df-48db-a6c7-e3ca69f2746b")
+	)
+	(label "CIC_DAT2"
+		(at 120 46.32 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "4eaa6f9a-a805-455d-9ffe-9b7fae34f5c7")
+	)
+	(wire (pts (xy 219.84 139.92) (xy 210 139.92))
+		(stroke (width 0) (type default))
+		(uuid "cc9f2ea2-f60b-4cb7-83dd-5c1865ad96d0")
+	)
+	(label "CIC_DAT1"
+		(at 208 139.92 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "50e092de-9e82-4187-8604-70d8684fe2d7")
+	)
+	(wire (pts (xy 219.84 142.46) (xy 205 142.46))
+		(stroke (width 0) (type default))
+		(uuid "61fbefbf-2021-402b-b905-6ae6d6f8f0a3")
+	)
+	(label "CIC_DAT2"
+		(at 203 142.46 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "8b7a9900-cebe-4309-8e15-db369fab6b1b")
+	)
+	(wire (pts (xy 219.84 145) (xy 200 145))
+		(stroke (width 0) (type default))
+		(uuid "58b8401f-d702-4c76-9fff-d041122ac671")
+	)
+	(label "CIC_RST"
+		(at 198 145 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "9fd65013-cd43-4c9a-b048-ce08f43d8073")
+	)
+	(wire (pts (xy 219.84 147.54) (xy 195 147.54))
+		(stroke (width 0) (type default))
+		(uuid "7f64ec1f-f1e2-4432-b643-ae08e1fd42f9")
+	)
+	(label "CIC_CLK"
+		(at 193 147.54 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "06fa487c-60d6-4dc3-b107-7ece69d91fd6")
+	)
+	(wire (pts (xy 110.48 109.22) (xy 50 109.22))
+		(stroke (width 0) (type default))
+		(uuid "c6857681-11d4-45db-b982-ba5243140456")
+	)
+	(label "SNES_A0"
+		(at 48 109.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "6b9f018f-62a6-46a1-b11b-d8d1581a211e")
+	)
+	(wire (pts (xy 110.48 111.72) (xy 50 111.72))
+		(stroke (width 0) (type default))
+		(uuid "b08115a5-c4bc-4dad-ac77-6ab35f1836a5")
+	)
+	(label "SNES_A1"
+		(at 48 111.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "b5aebf35-b636-477a-a4e7-d502ee4a6192")
+	)
+	(wire (pts (xy 110.48 114.22) (xy 50 114.22))
+		(stroke (width 0) (type default))
+		(uuid "628e6bad-b740-45d0-bba8-ff9308f9fbcd")
+	)
+	(label "SNES_A2"
+		(at 48 114.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "84649c4e-92ef-45e1-8ba8-bf951eabac33")
+	)
+	(wire (pts (xy 110.48 116.72) (xy 50 116.72))
+		(stroke (width 0) (type default))
+		(uuid "93d5c930-bc11-4ee3-9fba-923c3f006806")
+	)
+	(label "SNES_A3"
+		(at 48 116.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "1969672b-24b3-4846-9082-45737f1dec63")
+	)
+	(wire (pts (xy 110.48 119.22) (xy 50 119.22))
+		(stroke (width 0) (type default))
+		(uuid "aef106f4-74d6-4850-8d8f-d435fa540342")
+	)
+	(label "SNES_A4"
+		(at 48 119.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "f3921ec4-dbef-4714-9e6e-56f5446dc77a")
+	)
+	(wire (pts (xy 110.48 121.72) (xy 50 121.72))
+		(stroke (width 0) (type default))
+		(uuid "f8a4c25c-b761-4de2-81d6-bcf20bcf7826")
+	)
+	(label "SNES_A5"
+		(at 48 121.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "1588d89b-c14c-4084-9e58-dc5fbd68e514")
+	)
+	(wire (pts (xy 110.48 124.22) (xy 50 124.22))
+		(stroke (width 0) (type default))
+		(uuid "bbc65546-f1c7-41d6-913f-841763e54fc0")
+	)
+	(label "SNES_A6"
+		(at 48 124.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "39f41a82-4d43-4e2e-95dd-314769c3da72")
+	)
+	(wire (pts (xy 110.48 126.72) (xy 50 126.72))
+		(stroke (width 0) (type default))
+		(uuid "08ac94cf-5633-4835-9c4b-61ae38132f5d")
+	)
+	(label "SNES_A7"
+		(at 48 126.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "c8837498-ec67-49a0-9546-de7c1ff3370f")
+	)
+	(wire (pts (xy 110.48 129.22) (xy 50 129.22))
+		(stroke (width 0) (type default))
+		(uuid "4ab2da81-4370-44d5-976c-7c80239c8913")
+	)
+	(label "SNES_A8"
+		(at 48 129.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "c9467074-281f-4696-be38-1464c92941c7")
+	)
+	(wire (pts (xy 110.48 131.72) (xy 50 131.72))
+		(stroke (width 0) (type default))
+		(uuid "27ea1b91-b73d-4d16-9d22-818d35d62469")
+	)
+	(label "SNES_A9"
+		(at 48 131.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "f0f5189f-418c-480d-b2c7-587d535a4a68")
+	)
+	(wire (pts (xy 110.48 134.22) (xy 50 134.22))
+		(stroke (width 0) (type default))
+		(uuid "06c624a7-1756-478b-aa45-8f486fc6eddb")
+	)
+	(label "SNES_A10"
+		(at 48 134.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "31f8db53-5d69-4a7a-8b9e-ced9366289d7")
+	)
+	(wire (pts (xy 110.48 136.72) (xy 50 136.72))
+		(stroke (width 0) (type default))
+		(uuid "08a578d0-90a5-4f21-baa9-23d0c976135a")
+	)
+	(label "SNES_A11"
+		(at 48 136.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "46b0e8b3-fdd0-498c-92f0-1935fb1db1a1")
+	)
+	(wire (pts (xy 110.48 139.22) (xy 50 139.22))
+		(stroke (width 0) (type default))
+		(uuid "b4b763d0-a1b7-47f4-86b6-b2c1afe28633")
+	)
+	(label "/IRQ"
+		(at 48 139.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "7998687c-c649-4716-98ce-36383d18bb48")
+	)
+	(wire (pts (xy 110.48 141.72) (xy 50 141.72))
+		(stroke (width 0) (type default))
+		(uuid "b01f2696-6f5c-4c9c-b1ab-ef5c9305254a")
+	)
+	(label "SNES_D0"
+		(at 48 141.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "6644d57b-c6fd-4ae9-8c3a-c00dc20dd6c5")
+	)
+	(wire (pts (xy 110.48 144.22) (xy 50 144.22))
+		(stroke (width 0) (type default))
+		(uuid "bf3a67e8-af9b-4304-81b8-f8b2d5885b22")
+	)
+	(label "SNES_D1"
+		(at 48 144.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "b8778e73-12c6-48a9-b033-5c61a36bfae7")
+	)
+	(wire (pts (xy 110.48 146.72) (xy 50 146.72))
+		(stroke (width 0) (type default))
+		(uuid "c09fa7f3-f77e-4711-b50c-a082a6956e4c")
+	)
+	(label "SNES_D2"
+		(at 48 146.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "7afa977f-45e6-45a7-9ba7-c44be2ee4c81")
+	)
+	(wire (pts (xy 110.48 149.22) (xy 50 149.22))
+		(stroke (width 0) (type default))
+		(uuid "49a9e41c-0909-42c1-81ea-814caf32211d")
+	)
+	(label "SNES_D3"
+		(at 48 149.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "e184d945-a90e-48e2-8cea-d40af99a7f2e")
+	)
+	(wire (pts (xy 110.48 151.72) (xy 50 151.72))
+		(stroke (width 0) (type default))
+		(uuid "75a663d4-b592-40b2-bc73-05a8f956a8ad")
+	)
+	(label "/RD"
+		(at 48 151.72 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "c412d92e-61fb-404d-abb4-a3868742c9c9")
+	)
+	(wire (pts (xy 110.48 154.22) (xy 50 154.22))
+		(stroke (width 0) (type default))
+		(uuid "ff614d83-c6d7-4816-b154-f234352a7ada")
+	)
+	(label "/RESET"
+		(at 48 154.22 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "e788a7c2-8d22-46cf-812e-794ff579e156")
+	)
+	(wire (pts (xy 110.48 109.22) (xy 120 109.22))
+		(stroke (width 0) (type default))
+		(uuid "915e6756-4e0d-44ab-9cb6-0de6d80ef44c")
+	)
+	(label "SNES_A12"
+		(at 120 109.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "4b68be66-4647-4106-8f53-6ecf88598819")
+	)
+	(wire (pts (xy 110.48 111.72) (xy 120 111.72))
+		(stroke (width 0) (type default))
+		(uuid "bf3936aa-2b1d-493a-aebe-117a6a0765e5")
+	)
+	(label "SNES_A13"
+		(at 120 111.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "691c3c36-4197-41b1-be13-33e959bd289e")
+	)
+	(wire (pts (xy 110.48 114.22) (xy 120 114.22))
+		(stroke (width 0) (type default))
+		(uuid "6e99b5ac-de9c-40d3-831b-873e5e4f8dcb")
+	)
+	(label "SNES_A14"
+		(at 120 114.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "a0a9e0e3-da6b-4e33-8c11-8f211079783d")
+	)
+	(wire (pts (xy 110.48 116.72) (xy 120 116.72))
+		(stroke (width 0) (type default))
+		(uuid "3bf9f388-dc73-4dbb-ab73-37100661cdac")
+	)
+	(label "SNES_A15"
+		(at 120 116.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ec83b2d2-15e4-46f8-b0cf-1927fdd541a1")
+	)
+	(wire (pts (xy 110.48 119.22) (xy 120 119.22))
+		(stroke (width 0) (type default))
+		(uuid "09c7cdc5-af69-4bb0-828f-d4e762a60cc2")
+	)
+	(label "SNES_A16"
+		(at 120 119.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "19330bdf-6df7-4ee9-8db5-11232ceef630")
+	)
+	(wire (pts (xy 110.48 121.72) (xy 120 121.72))
+		(stroke (width 0) (type default))
+		(uuid "31937ad1-5628-4b15-a7fb-19bf214ac98a")
+	)
+	(label "SNES_A17"
+		(at 120 121.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "aba6d4b5-9ea3-4e6f-9cae-7be9812f84cc")
+	)
+	(wire (pts (xy 110.48 124.22) (xy 120 124.22))
+		(stroke (width 0) (type default))
+		(uuid "e68dc2f3-b22a-4ff7-9c51-300d76029e08")
+	)
+	(label "SNES_A18"
+		(at 120 124.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "70ad6454-ee46-4527-9b91-3b35e80ef861")
+	)
+	(wire (pts (xy 110.48 126.72) (xy 120 126.72))
+		(stroke (width 0) (type default))
+		(uuid "86464668-c2e2-4341-ba6c-5d26ec471c2d")
+	)
+	(label "SNES_A19"
+		(at 120 126.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ff766733-f217-4685-a0ae-71981236bba7")
+	)
+	(wire (pts (xy 110.48 129.22) (xy 120 129.22))
+		(stroke (width 0) (type default))
+		(uuid "c9736f9d-28d0-4bfb-8f0f-b810a0ec1b40")
+	)
+	(label "SNES_A20"
+		(at 120 129.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ada79be1-2e97-4ae0-bff5-8f242824516b")
+	)
+	(wire (pts (xy 110.48 131.72) (xy 120 131.72))
+		(stroke (width 0) (type default))
+		(uuid "0f30ef2d-8524-430e-a4ab-2050d4298ee9")
+	)
+	(label "SNES_A21"
+		(at 120 131.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "6f613bd9-1703-4a7a-8fc1-35ca736afab0")
+	)
+	(wire (pts (xy 110.48 134.22) (xy 120 134.22))
+		(stroke (width 0) (type default))
+		(uuid "448b523d-3c86-437c-b796-567034572b6d")
+	)
+	(label "SNES_A22"
+		(at 120 134.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "a2846960-a0a9-430b-99c0-0898d1b9a167")
+	)
+	(wire (pts (xy 110.48 136.72) (xy 120 136.72))
+		(stroke (width 0) (type default))
+		(uuid "afe29ae8-5500-4172-ac56-b52f1dfa92df")
+	)
+	(label "SNES_A23"
+		(at 120 136.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "434e0eed-3131-4391-9974-89033f23ebc5")
+	)
+	(wire (pts (xy 110.48 139.22) (xy 120 139.22))
+		(stroke (width 0) (type default))
+		(uuid "bdcc56f8-da0c-4acc-8175-74907837b035")
+	)
+	(label "/ROMSEL"
+		(at 120 139.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "b95cc2da-dca6-4263-9104-1c3a6e10ba2b")
+	)
+	(wire (pts (xy 110.48 141.72) (xy 120 141.72))
+		(stroke (width 0) (type default))
+		(uuid "352dd3b8-e76f-45da-8130-3881d8f34446")
+	)
+	(label "SNES_D4"
+		(at 120 141.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "16cd9b93-3406-4e23-bd2c-d3036903bd51")
+	)
+	(wire (pts (xy 110.48 144.22) (xy 120 144.22))
+		(stroke (width 0) (type default))
+		(uuid "e8b9a3c6-276d-429a-a904-42f3a11e94f8")
+	)
+	(label "SNES_D5"
+		(at 120 144.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "4595d871-0027-4156-a776-c20c192317d1")
+	)
+	(wire (pts (xy 110.48 146.72) (xy 120 146.72))
+		(stroke (width 0) (type default))
+		(uuid "c903df27-610d-49b4-a95e-b6e99e247832")
+	)
+	(label "SNES_D6"
+		(at 120 146.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "982b733a-ea14-428d-a4d3-98a59492c630")
+	)
+	(wire (pts (xy 110.48 149.22) (xy 120 149.22))
+		(stroke (width 0) (type default))
+		(uuid "cb58c6e7-91d4-40e0-997c-7b6b3ca54a0c")
+	)
+	(label "SNES_D7"
+		(at 120 149.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "1a395162-fc68-4c3d-9c85-048d83ac9904")
+	)
+	(wire (pts (xy 110.48 151.72) (xy 120 151.72))
+		(stroke (width 0) (type default))
+		(uuid "46c9dd4f-443b-4876-aa82-230d3d4ffcb1")
+	)
+	(label "/WR"
+		(at 120 151.72 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "bcbddd28-7e19-4171-9a96-9b4312f60f8e")
+	)
+	(wire (pts (xy 110.48 154.22) (xy 120 154.22))
+		(stroke (width 0) (type default))
+		(uuid "6d58b824-a0d0-4063-aa5e-8efb9a56bc9f")
+	)
+	(label "PHI2"
+		(at 120 154.22 0)
+		(effects (font (size 1.27 1.27)))
+		(uuid "f6abda23-5f74-45cd-883d-515173078df2")
+	)
+	(hierarchical_label "SNES_A0"
+		(shape bidirectional)
+		(at 310 30 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "9072235a-0db8-4a25-8b93-8eb8a4d2d354")
+	)
+	(hierarchical_label "SNES_A1"
+		(shape bidirectional)
+		(at 310 35 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "54ee5a5c-e461-4a37-94e5-feae95f5a96e")
+	)
+	(hierarchical_label "SNES_A2"
+		(shape bidirectional)
+		(at 310 40 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "1303dfdf-d4f7-40b3-9648-44a2060924d4")
+	)
+	(hierarchical_label "SNES_A3"
+		(shape bidirectional)
+		(at 310 45 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "9dd06a39-2d00-47c3-a0af-58d33ab0f735")
+	)
+	(hierarchical_label "SNES_A4"
+		(shape bidirectional)
+		(at 310 50 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "adfc7df1-1bdf-4e1d-91f5-7448e238c0a1")
+	)
+	(hierarchical_label "SNES_A5"
+		(shape bidirectional)
+		(at 310 55 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "4ff95991-bc3e-4a5b-b8c1-857538cc288b")
+	)
+	(hierarchical_label "SNES_A6"
+		(shape bidirectional)
+		(at 310 60 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "0c9a428b-f9cb-4382-b552-a7d18f55f17d")
+	)
+	(hierarchical_label "SNES_A7"
+		(shape bidirectional)
+		(at 310 65 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "c19c6282-1e89-4fa7-bced-a30daa8ad114")
+	)
+	(hierarchical_label "SNES_A8"
+		(shape bidirectional)
+		(at 310 70 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "a0a9f594-04cf-4151-997b-bcfb10cd5172")
+	)
+	(hierarchical_label "SNES_A9"
+		(shape bidirectional)
+		(at 310 75 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "f14d3fc3-4d4a-4688-9944-3b608956dead")
+	)
+	(hierarchical_label "SNES_A10"
+		(shape bidirectional)
+		(at 310 80 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "d5f55948-11fc-45da-9c97-11610447e375")
+	)
+	(hierarchical_label "SNES_A11"
+		(shape bidirectional)
+		(at 310 85 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "aba76859-8e53-4e41-81c1-48375a3e1d02")
+	)
+	(hierarchical_label "SNES_A12"
+		(shape bidirectional)
+		(at 310 90 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "45beb21c-de77-42b9-823c-06a8dd3113da")
+	)
+	(hierarchical_label "SNES_A13"
+		(shape bidirectional)
+		(at 310 95 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "7de085e8-67ec-4e1a-8b83-b051b247f025")
+	)
+	(hierarchical_label "SNES_A14"
+		(shape bidirectional)
+		(at 335 30 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "84bde1e1-860b-4d2a-af4d-a6fd89df8910")
+	)
+	(hierarchical_label "SNES_A15"
+		(shape bidirectional)
+		(at 335 35 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "48f8e5d9-e2ca-4e31-9d02-9589d2d8ad59")
+	)
+	(hierarchical_label "SNES_A16"
+		(shape bidirectional)
+		(at 335 40 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "fc52bdd0-0ea5-4d23-b668-c8f66d5f61ab")
+	)
+	(hierarchical_label "SNES_A17"
+		(shape bidirectional)
+		(at 335 45 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "d82647cf-7426-4e40-9bb6-4ed44d222aa8")
+	)
+	(hierarchical_label "SNES_A18"
+		(shape bidirectional)
+		(at 335 50 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "dbc6dc25-9ec3-40b9-9f0b-f33127bfd042")
+	)
+	(hierarchical_label "SNES_A19"
+		(shape bidirectional)
+		(at 335 55 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "f62572d7-3c37-43d7-b816-5ba00210ae40")
+	)
+	(hierarchical_label "SNES_A20"
+		(shape bidirectional)
+		(at 335 60 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "48d9fa3c-0cc1-4fcc-a150-0525018f43b1")
+	)
+	(hierarchical_label "SNES_A21"
+		(shape bidirectional)
+		(at 335 65 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "a8590bc3-5cfb-44e1-8f48-880c5c354c14")
+	)
+	(hierarchical_label "SNES_A22"
+		(shape bidirectional)
+		(at 335 70 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "796970f1-984b-4222-b929-97651743b8eb")
+	)
+	(hierarchical_label "SNES_A23"
+		(shape bidirectional)
+		(at 335 75 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "b4d9c8e4-3f31-4380-8b01-078c9de70b17")
+	)
+	(hierarchical_label "SNES_D0"
+		(shape bidirectional)
+		(at 335 80 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "1c1b80d8-2f9c-4f46-acec-f4dd215dd946")
+	)
+	(hierarchical_label "SNES_D1"
+		(shape bidirectional)
+		(at 335 85 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "13d24a4c-a6bf-4acb-8eb8-b11c157a7083")
+	)
+	(hierarchical_label "SNES_D2"
+		(shape bidirectional)
+		(at 335 90 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "c9844970-d619-46dd-9a60-195ffec3b285")
+	)
+	(hierarchical_label "SNES_D3"
+		(shape bidirectional)
+		(at 335 95 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "2649f933-b72c-46d5-aa62-e130dafad9cf")
+	)
+	(hierarchical_label "SNES_D4"
+		(shape bidirectional)
+		(at 360 30 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ee2e1ce6-0040-47ef-beb7-cf588846ff75")
+	)
+	(hierarchical_label "SNES_D5"
+		(shape bidirectional)
+		(at 360 35 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "8efec23e-1914-4127-867b-c7b49701d4ed")
+	)
+	(hierarchical_label "SNES_D6"
+		(shape bidirectional)
+		(at 360 40 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "68ed44ab-4948-4194-8dbc-1797ea959391")
+	)
+	(hierarchical_label "SNES_D7"
+		(shape bidirectional)
+		(at 360 45 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "33db3eb9-8603-4993-a94b-13e37acbfb5c")
+	)
+	(hierarchical_label "/RD"
+		(shape bidirectional)
+		(at 360 50 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "d1c43469-1221-4f26-87e3-b8ac112a331e")
+	)
+	(hierarchical_label "/WR"
+		(shape bidirectional)
+		(at 360 55 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "3e94f2d2-83a2-4b22-b3b3-b2fbf46fecbb")
+	)
+	(hierarchical_label "/ROMSEL"
+		(shape bidirectional)
+		(at 360 60 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "289155e6-500f-4948-8815-80edefa7dd16")
+	)
+	(hierarchical_label "/IRQ"
+		(shape bidirectional)
+		(at 360 65 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ef562c8a-7659-4719-99d3-d9753cb9cdfa")
+	)
+	(hierarchical_label "/RESET"
+		(shape bidirectional)
+		(at 360 70 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "e2f0d581-633a-409a-8f31-bbed2002de86")
+	)
+	(hierarchical_label "PHI2"
+		(shape bidirectional)
+		(at 360 75 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "9a1edca0-7756-401f-af3e-33404f7b00f8")
+	)
+	(hierarchical_label "CIC_CLK"
+		(shape bidirectional)
+		(at 360 80 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "db88125d-d57b-4cc7-8eca-14eb849ee44f")
+	)
+	(hierarchical_label "CIC_RST"
+		(shape bidirectional)
+		(at 360 85 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "ab7a34d2-b78d-42e3-a610-583c1327e992")
+	)
+	(hierarchical_label "CIC_DAT1"
+		(shape bidirectional)
+		(at 360 90 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "a202137b-7d79-44f2-872f-47f2848495d9")
+	)
+	(hierarchical_label "CIC_DAT2"
+		(shape bidirectional)
+		(at 360 95 180)
+		(effects (font (size 1.27 1.27)))
+		(uuid "c02015dd-096f-4367-a72b-218e79cd9d03")
+	)
+	(text "SHEET 1: SNES 62-Pin Cartridge Connector & SuperCIC\\nPitch: 2.50mm Metric | PCB: 1.20mm ENIG 30-deg Bevel\\n\\nU1: PIC12F629 SuperCIC (NTSC/PAL auto-detect)\\nD1,D2: USBLC6-2SC6 ESD/TVS protection\\nC5: 100nF decoupling"
+		(at 30 30 0)
+		(effects (font (size 2.0 2.0)) (justify left top))
+		(uuid "4c1a8e30-177c-4df0-bdf1-b984a8c0b407")
+	)
 )

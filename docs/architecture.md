@@ -1,5 +1,5 @@
-# Arquitetura
+# Architecture
 
-O Home Assistant é a fonte de verdade. A primeira versão usa `GET /api/states` no bridge. A API WebSocket do Home Assistant oferece `get_states`, `get_services` e assinatura de `state_changed`; a V1 deve migrar para WebSocket para atualizar a interface por evento.
+Home Assistant is the source of truth. The first version uses `GET /api/states` on the bridge. Home Assistant's WebSocket API offers `get_states`, `get_services`, and `state_changed` subscription; V1 should migrate to WebSocket to update the UI via events.
 
-A ROM recebe `domain + features + state + name + value` e escolhe o renderer. Coordenadas X/Y existem somente como cálculo de layout, nunca como definição do dispositivo.
+The ROM receives `domain + features + state + name + value` and chooses the renderer. X/Y coordinates exist only as layout calculation, never as device definition.

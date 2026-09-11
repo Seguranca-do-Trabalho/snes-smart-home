@@ -1,45 +1,45 @@
-# Diretrizes de Fabricação PCBWay para Cartucho SNES / Super Famicom
+# PCBWay Fabrication Guidelines for SNES / Super Famicom Cartridge
 
-Ao configurar o pedido de fabricação da placa de circuito impresso na **PCBWay** (ou JLCPCB), utilize obrigatoriamente os seguintes parâmetros:
+When configuring the PCB fabrication order on **PCBWay** (or JLCPCB), you must use the following parameters:
 
 ---
 
-### 1. Especificações Críticas da Placa
+### 1. Critical Board Specifications
 
-| Parâmetro | Valor Recomendado | Motivo / Observação Crítica |
+| Parameter | Recommended Value | Reason / Critical Note |
 | :--- | :--- | :--- |
-| **Layers (Camadas)** | **4 Layers** | Necessário para integridade de sinal do barramento de 21MHz, plano contínuo de GND e impedância RF do ESP32-C6. |
-| **PCB Thickness (Espessura)** | **1.2 mm** (ou 1.25 mm) | **CRÍTICO:** O conector original do Super Famicom / SNES foi desenhado para PCBs de **1.2 mm**. Placas comuns de 1.6 mm são muito grossas e danificam/empenam as lâminas do slot do console. Placas de 0.8 mm ficam frouxas. |
-| **Surface Finish (Acabamento)** | **ENIG (Electroless Nickel Immersion Gold)** ou **Hard Gold (Gold Fingers)** | Ouro de imersão resistente à abrasão das inserções e oxidação ao longo dos anos. |
-| **Gold Fingers (Dedos de Ouro)** | **Yes** | Selecione para aplicar banho de ouro reforçado nos 62 contatos de borda. |
-| **Edge Chamfering / Beveling** | **Yes, 30° Chamfer** (30 graus) | **CRÍTICO:** Faz o chanfro em ângulo de 30° na borda inferior dos contatos, permitindo que o cartucho deslize suavemente para dentro do slot do console sem engasgar ou arrancar os pads. |
-| **Connector Pitch** | **2.50 mm** (Métrico) | Conferir que o footprint usa passo de 2.50 mm (não 2.54 mm). |
-| **Solder Mask (Máscara de Solda)** | Azul / Preto Fosco / Cinza | Estética de sua preferência. |
-| **Silkscreen (Serigrafia)** | Branco | Texto em alta legibilidade. |
-| **Copper Weight (Cobre)** | 1 oz (externo) / 0.5 oz (interno) | Padrão industrial. |
-| **Material** | FR-4 Standard (Tg 150-170) | Alta estabilidade térmica durante reflow. |
+| **Layers** | **4 Layers** | Required for 21MHz bus signal integrity, continuous GND plane, and ESP32-C6 RF impedance. |
+| **PCB Thickness** | **1.2 mm** (or 1.25 mm) | **CRITICAL:** The original Super Famicom / SNES connector was designed for **1.2 mm** PCBs. Standard 1.6 mm boards are too thick and will damage/warp the console slot blades. 0.8 mm boards are too loose. |
+| **Surface Finish** | **ENIG (Electroless Nickel Immersion Gold)** or **Hard Gold (Gold Fingers)** | Abrasion-resistant immersion gold for insertions and oxidation protection over years of use. |
+| **Gold Fingers** | **Yes** | Select to apply reinforced gold plating on the 62 edge contacts. |
+| **Edge Chamfering / Beveling** | **Yes, 30° Chamfer** (30 degrees) | **CRITICAL:** Creates a 30° angle chamfer on the bottom edge of the contacts, allowing the cartridge to slide smoothly into the console slot without snagging or lifting pads. |
+| **Connector Pitch** | **2.50 mm** (Metric) | Verify the footprint uses a 2.50 mm pitch (not 2.54 mm). |
+| **Solder Mask** | Blue / Matte Black / Gray | Your preferred aesthetic. |
+| **Silkscreen** | White | High legibility text. |
+| **Copper Weight** | 1 oz (outer) / 0.5 oz (inner) | Industrial standard. |
+| **Material** | FR-4 Standard (Tg 150-170) | High thermal stability during reflow. |
 
 ---
 
-### 2. Stackup Sugerido de 4 Camadas (1.2mm)
+### 2. Suggested 4-Layer Stackup (1.2mm)
 
 ```text
-Camada 1 (Top):     Sinais de alta velocidade, componentes SMD, antena RF
-Camada 2 (In1):     Plano de Terra Sólido (GND)
-Camada 3 (In2):     Plano de Alimentação (+3.3V Digital + 5V SNES)
-Camada 4 (Bottom):  Sinais de controle, barramento secundário, contatos de borda traseiros
+Layer 1 (Top):     High-speed signals, SMD components, RF antenna
+Layer 2 (In1):     Solid Ground Plane (GND)
+Layer 3 (In2):     Power Plane (+3.3V Digital + 5V SNES)
+Layer 4 (Bottom):  Control signals, secondary bus, rear edge contacts
 ```
 
 ---
 
-### 3. Cuidados Especiais no Roteamento & Layout
+### 3. Special Routing & Layout Considerations
 
-1. **Antena do ESP32-C6:**
-   - Posicione o módulo ESP32-C6-MINI na borda superior do cartucho (longe do conector de 62 pinos).
-   - Mantenha a área sob a antena do módulo completamente livre de cobre (sem trilhas e sem planos de GND em todas as 4 camadas).
-2. **Diferencial RS-485:**
-   - Trilhas A e B roteadas em par diferencial com impedância de 120 ohms acoplada.
-3. **Barramento de Dados (D0..D7):**
-   - Comprimento casado entre os buffers 74LVC e o RP2350/Flash.
-4. **Desacoplamento do Buck Converter:**
-   - Posicione C_IN1, L1 e C_OUT1 o mais próximo possível dos pinos do SY8089 para minimizar o loop de comutação de 1.5 MHz.
+1. **ESP32-C6 Antenna:**
+   - Position the ESP32-C6-MINI module on the top edge of the cartridge (away from the 62-pin connector).
+   - Keep the area under the module antenna completely free of copper (no traces and no GND planes on all 4 layers).
+2. **RS-485 Differential:**
+   - Route A and B traces as a differential pair with 120 ohm coupled impedance.
+3. **Data Bus (D0..D7):**
+   - Matched length between the 74LVC buffers and the RP2350/Flash.
+4. **Buck Converter Decoupling:**
+   - Place C_IN1, L1, and C_OUT1 as close as possible to the SY8089 pins to minimize the 1.5 MHz switching loop.
