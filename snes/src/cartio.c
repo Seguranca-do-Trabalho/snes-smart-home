@@ -1,4 +1,5 @@
 #include "cartio.h"
+#include "cart_hw.h"
 #include <string.h>
 
 Entity entities[MAX_ENTITIES];
@@ -33,8 +34,8 @@ void cartio_init(void) {
 void cartio_refresh(void) {
     volatile u8 *mailbox = (volatile u8 *)CART_MAILBOX_BASE;
 
-    /* Check if hardware mailbox has valid signature 'S', 'H', 0x01 */
-    if (mailbox[0] == 'S' && mailbox[1] == 'H' && mailbox[2] == 0x01) {
+    /* Fast 65816 Assembly probe of hardware mailbox signature */
+    if (cart_hw_probe()) {
         u8 count = mailbox[3];
         u16 offset = 4;
         u8 i;
@@ -136,12 +137,9 @@ u8 cartio_command(u8 index, u8 command) {
     if (!e)
         return 0;
 
-    /* Hardware mailbox command write */
-    if (mailbox[0] == 'S' && mailbox[1] == 'H') {
-        mailbox[0x07F0] = command;
-        mailbox[0x07F1] = index;
-        mailbox[0x07F2] = (e->state_code == 1) ? 0 : 1;
-        mailbox[0x07F3] = 0x01; /* Handshake flag for RP2350 */
+    /* Hardware mailbox command write using 65816 Assembly */
+    if (cart_hw_probe()) {
+        cart_hw_send_cmd(command, index, (e->state_code == 1) ? 0 : 1);
         return 1;
     }
 

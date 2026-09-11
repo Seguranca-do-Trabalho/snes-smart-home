@@ -6,6 +6,17 @@ Projetado para rodar em hardware real e emuladores, com arquitetura 100% orienta
 
 ---
 
+## 📷 Fotos e Telas da ROM no Super Nintendo
+
+| Página 1: Iluminação, Garagem, Clima e Fan | Página 2: Fechadura, Spotify, Alarme e Switch |
+|:---:|:---:|
+| ![Página 1](docs/screenshots/snes_smarthome_page1.png) | ![Página 2](docs/screenshots/snes_smarthome_page2.png) |
+
+### Simulação CRT Arcade Retrô (Scanlines & PVM Phosphor)
+![Visão CRT](docs/screenshots/snes_smarthome_crt.png)
+
+---
+
 ## 1. Arquitetura do Sistema
 
 ```text
@@ -52,14 +63,16 @@ Projetado para rodar em hardware real e emuladores, com arquitetura 100% orienta
 
 ```text
 snes-smart-home/
-├── snes/                      # Código-fonte da ROM SNES (C + ASM)
+├── snes/                      # Código-fonte da ROM SNES (C + 65816 Assembly)
 │   ├── src/
-│   │   ├── main.c             # Loop principal do jogo e vblank
-│   │   ├── ui.c               # Renderização de tela, 8 paletas CGRAM, paginação e sprites
+│   │   ├── main.c             # Loop principal do jogo e vblank (C)
+│   │   ├── ui.c               # Renderização de tela, 8 paletas CGRAM, paginação e sprites (C)
 │   │   ├── ui.h
-│   │   ├── audio.c            # Driver de som SPC700 (efeitos de menu, toggle e chime)
+│   │   ├── audio.c            # Driver de som SPC700 (C)
 │   │   ├── audio.h
-│   │   ├── cartio.c           # I/O do cartucho (SRAM mailbox + fallback sim)
+│   │   ├── cart_hw.asm        # Driver de baixo nível do barramento em 65816 Assembly Puro
+│   │   ├── cart_hw.h          # Header C para chamadas de rotinas ASM
+│   │   ├── cartio.c           # I/O do cartucho (SRAM mailbox + fallback sim) (C)
 │   │   ├── cartio.h
 │   │   └── config.h           # Configurações de exibição, limites e fallback SIMULATOR
 │   ├── assets/                # Bitmaps convertidos (fonte e ícones)
@@ -68,9 +81,18 @@ snes-smart-home/
 │   │   └── make_icons.py      # Gerador procedural da folha de sprites 16x320
 │   ├── res/                   # Recursos de áudio para smconv
 │   │   └── soundbank.it       # Tracker ImpulseTracker com samples e SFX
-│   ├── data.asm               # Inclusão dos dados gráficos na ROM
+│   ├── data.asm               # Inclusão dos dados gráficos na ROM (WLA-DX)
 │   ├── Makefile               # Script de build PVSnesLib 4.6.0 com smconv
 │   └── super_home.sfc         # ROM compilada de 256 KB (LoROM SlowROM)
+│
+├── firmware/                  # Firmware dos Coprocessadores do Cartucho
+│   ├── esp32/                 # Gateway Wi-Fi 6 / Thread (C / ESP-IDF)
+│   │   ├── main/main.c        # Cliente REST Home Assistant + Master SPI
+│   │   └── CMakeLists.txt
+│   └── rp2350/                # Emulador de Barramento SNES 62-pinos (C + PIO Assembly)
+│       ├── main.c             # Gerenciamento Dual-Core M33 e Mailbox SRAM
+│       ├── snes_bus.pio       # Máquina de estados PIO para ciclos /RD e /WR (<120ns)
+│       └── CMakeLists.txt
 │
 ├── hardware/                  # Projeto Eletrônico Completo KiCad 10
 │   ├── snes_smarthome_cartridge.kicad_pro   # Projeto KiCad
@@ -89,15 +111,16 @@ snes-smart-home/
 │   ├── ha_bridge.py           # Polling REST, servidor HTTP e socket TCP
 │   └── requirements.txt
 │
-├── ha-config/                 # Configuração de teste do Home Assistant
-│   └── configuration.yaml
+├── tests/                     # Suite de Testes Automatizados (Python)
+│   └── test_system.py         # Testes de integridade da ROM, protocolo e mailbox
 │
-├── cart/                      # Especificação do protocolo binário
-│   └── protocol.md
-│
-├── docs/                      # Documentação de testes e arquitetura
+├── docs/                      # Documentação de testes, capturas e arquitetura
+│   ├── screenshots/           # Fotos e capturas da tela em alta resolução
 │   ├── architecture.md
 │   └── test-plan.md
+│
+├── scripts/                   # Utilitários de renderização e build
+│   └── generate_screenshots.py# Gerador de screenshots pixel-perfect e CRT
 │
 ├── build-rom.sh               # Script de compilação da ROM (1 clique)
 ├── docker-compose.yml         # Ambiente local com Home Assistant + Bridge
@@ -162,6 +185,36 @@ Os textos dos dispositivos recebem cores semânticas conforme tipo e estado:
 - **Cinza Neutro (`PAL_GRAY`):** Estados desligados (`"OFF"`, `"CLSD"`, `"LOCKD"`).
 - **Roxo Neon (`PAL_PURPLE`):** Dispositivos de mídia (`"PLAY"`).
 - **Âmbar (`PAL_AMBER`):** Contadores de dispositivos e avisos.
+
+### Arquitetura da ROM (C + 65816 Assembly Puro)
+A ROM utiliza uma estrutura híbrida de alto e baixo nível:
+- **C (`816-tcc`):** Gerenciamento de interface gráfica, paginação dinâmica, animações, renderização de fontes e máquinas de estados (`snes/src/main.c`, `snes/src/ui.c`, `snes/src/audio.c`).
+- **65816 Assembly Puro (`wla-65816`):** O módulo [`snes/src/cart_hw.asm`](snes/src/cart_hw.asm) implementa rotinas de baixo nível com endereçamento longo de 24 bits (`$700000` a `$7007FF`):
+  - `cart_hw_probe()`: Sonda atômica da assinatura `'S', 'H', 0x01` no barramento SRAM do cartucho.
+  - `cart_hw_send_cmd()`: Escrita atômica nos registradores de comando do RP2350 (`0x07F0..0x07F3`) com barreira de memória e flag de handshake.
+  - `data.asm`: Alocação dos bancos de dados gráficos em `.rodata1`.
+
+### Firmwares dos Coprocessadores
+Para garantir comunicação sem sobrecarregar a CPU do SNES, o cartucho conta com coprocessadores dedicados:
+1. **ESP32-C6 (`firmware/esp32/` - C / ESP-IDF):**
+   - Conecta-se à rede Wi-Fi 6 (802.11ax).
+   - Realiza polling no Home Assistant Bridge (`/snapshot.bin`) ou assina streams TCP.
+   - Valida integridade via CRC16 Modbus.
+   - Envia snapshots e recebe comandos da SNES via barramento SPI a 10 MHz.
+2. **RP2350B (`firmware/rp2350/` - C + PIO Assembly):**
+   - **Core 0 + PIO (`snes_bus.pio`):** Emula SRAM de porta dupla respondendo aos ciclos `/RD` e `/WR` do barramento de 62 pinos do SNES em menos de 120 ns.
+   - **Core 1:** Sincroniza buffers com o ESP32 via SPI e despacha comandos gerados pelo jogador.
+
+### Testes Automatizados da ROM e Protocolo
+O repositório inclui uma suite completa de testes automatizados em Python:
+```bash
+python3 -m unittest discover -s tests -p "test_*.py" -v
+```
+Os testes cobrem:
+- Integridade binária da ROM de 256 KB e cálculo de checksum complement do cabeçalho LoROM.
+- Serialização e deserialização do protocolo binário compacto (`SH\x01`) e validação do algoritmo CRC16/Modbus (`0xA001`).
+- Mapeamento e normalização de domínios e serviços do Home Assistant.
+- Alinhamento dos offsets de registradores de comando na memória do cartucho.
 
 ---
 

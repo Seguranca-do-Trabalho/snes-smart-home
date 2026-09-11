@@ -1,0 +1,21 @@
+;
+; Super Famicom / SNES Cartridge Bus Emulator PIO Program for RP2350
+; Responds to /RD and /WR cycles from SNES CPU within 120ns.
+;
+.program snes_bus_read
+.side_set 1 opt
+
+; Wait for SNES /RD pin (GPIO falling edge) and output byte from FIFO
+.wrap_target
+    wait 0 gpio 20        ; Wait for SNES /RD asserted low
+    out pins, 8           ; Drive 8-bit data bus
+    wait 1 gpio 20        ; Wait for SNES /RD de-asserted high
+.wrap
+
+.program snes_bus_write
+.wrap_target
+    wait 0 gpio 21        ; Wait for SNES /WR asserted low
+    in pins, 8            ; Sample 8-bit data bus
+    wait 1 gpio 21        ; Wait for SNES /WR de-asserted high
+    push noblock          ; Push to Core 0 RX FIFO
+.wrap

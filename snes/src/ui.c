@@ -147,7 +147,7 @@ static void draw_header(void) {
 
     draw_text(1, 1, PAL_GOLD, "SUPER HOME SYSTEM");
     draw_text(24, 1, PAL_GREEN, live_tag);
-    draw_text(0, 2, PAL_WHITE, "────────────────────────────────");
+    draw_text(0, 2, PAL_WHITE, "--------------------------------");
     draw_text(5, 3, PAL_WHITE, "Device");
     draw_text(18, 3, PAL_WHITE, "Type");
     draw_text(24, 3, PAL_WHITE, "State");
@@ -293,7 +293,7 @@ void ui_draw(void) {
     draw_text(1, 21, PAL_GOLD, ptxt);
 
     sprintf(ptxt, "DEVICES: %d", count);
-    draw_text(14, 21, PAL_AMBER, ptxt);
+    draw_text(12, 21, PAL_AMBER, ptxt);
 
     draw_text(25, 21, PAL_GREEN, "OK-IOT");
 
