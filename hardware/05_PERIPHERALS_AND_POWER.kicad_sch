@@ -1,0 +1,20 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "d6f64a42-dfce-4be2-9731-7e16f5c45093")
+	(paper "A3")
+	(title_block
+		(title "Peripherals (MicroSD, RTC, RS-485, I2C) & Power")
+		(date "2026-09-10")
+		(rev "V1.0")
+		(company "SNES SmartHome Project")
+	)
+
+	(text "SHEET 5: PERIPHERALS (MICROSD, RTC, RS-485, I2C) & 5V->3.3V BUCK\n\n1. Power Supply Subsystem (High Efficiency Synchronous Buck):\n   - Input: +5V_SNES from cartridge edge (pins 27, 58)\n   - Reverse polarity / overcurrent protection: SS34 Schottky diode / PTC resettable fuse (1.5A)\n   - U9: Silergy SY8089AAAC (or AP62200 / TPS62088) Synchronous Step-Down DC-DC Converter\n     Package: SOT-23-5, 1.5MHz switching frequency, 94% efficiency, 2.0A continuous output\n     Inductor: L1 = 2.2uH SMD high-current power inductor (CDRH3D16 or 0805)\n     Feedback: R1 = 100k, R2 = 22k for calibrated 3.30V VCC rail\n     Input filter: 10uF 0805 X7R + 47uF low-ESR tantalum\n     Output filter: 22uF 0805 X7R + 47uF low-ESR tantalum\n     Much cooler than linear regulators (AMS1117), preserves SNES internal power brick!\n\n2. MicroSD Card Socket:\n   - J4: Push-Pull MicroSD connector, connected via SPI/SDIO to RP2350\n   - Enables logging, configuration files (wifi.txt / ha_config.json), and sound/ROM assets\n   - 10k pullups on CS and CMD lines, dedicated 100nF + 10uF decoupling\n\n3. High-Precision RTC (Real-Time Clock):\n   - U10: Maxim DS3231MZ+ (SOIC-8) with integrated MEMS resonator, +-5ppm accuracy\n   - I2C connected to RP2350 (SCL, SDA with 4.7k pullups to 3.3V)\n   - BT1: CR1220 3V coin cell battery clip for timekeeping when console is powered off\n\n4. RS-485 Industrial / Home Automation Bus:\n   - U11: SP3485CN-L (SOIC-8, 3.3V half-duplex RS-485 transceiver)\n   - Connected to RP2350 UART + direction control pin\n   - J5: 3-pin 3.5mm screw terminal block (A, B, GND) with 120 ohm termination jumper\n   - SM712 bidirectional TVS diode array for lightning & ESD protection on RS-485 differential lines\n\n5. External Sensor / Display Expansion:\n   - J6: Qwiic / STEMMA QT 4-pin 1.0mm JST-SH connector (GND, 3.3V, SDA, SCL)\n   - Plug-and-play connection for external BME280, OLED, or radar sensors"
+		(at 30 30 0)
+		(effects (font (size 2.2 2.2)) (justify left top))
+		(uuid "9b9ef353-561e-4c07-a109-3648529b9454")
+	)
+
+)

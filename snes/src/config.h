@@ -1,0 +1,11 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+#define MAX_ENTITIES 24
+#define MAX_NAME_LEN 28
+#define MAX_STATE_LEN 12
+#define MAX_VALUE_LEN 12
+#define MAX_DOMAIN_LEN 12
+#define CART_PROTOCOL_VERSION 1
+#define UI_ROWS_PER_PAGE 7
+#define UI_REFRESH_FRAMES 30
+#endif

@@ -1,0 +1,20 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "3e393af3-78b1-4c3a-b64e-2710764756c7")
+	(paper "A3")
+	(title_block
+		(title "RP2350B MCU Subsystem & Mailbox")
+		(date "2026-09-10")
+		(rev "V1.0")
+		(company "SNES SmartHome Project")
+	)
+
+	(text "SHEET 3: RP2350B DUAL-CORE MCU SUBSYSTEM\n\nMCU Selection: Raspberry Pi RP2350B (QFN-80)\n- 48 GPIOs allow dedicated bus taps and rich peripheral connectivity\n- Dual ARM Cortex-M33 cores @ 150MHz (overclockable to 250MHz+)\n- 520KB on-chip SRAM: perfectly hosts the Home Assistant Mailbox & dynamic snapshot\n- 12 PIO State Machines for real-time bus interception, cycle-accurate timing\n\nPin Allocation:\n- GPIO0..GPIO7: BUS_D0..BUS_D7 (Bidirectional data bus for SRAM/mailbox access)\n- GPIO8..GPIO23: BUS_A0..BUS_A15 (Address bus snooping & decoding)\n- GPIO24: BUS_/RD, GPIO25: BUS_/WR, GPIO26: BUS_/ROMSEL, GPIO27: BUS_PHI2\n- GPIO28: BUS_/IRQ (Open-drain to SNES /IRQ line for instant event notification)\n- GPIO29..GPIO32: SPI0 to ESP32-C6 (SCK, MOSI, MISO, CS)\n- GPIO33, GPIO34: UART0 to ESP32-C6 (TX, RX)\n- GPIO35, GPIO36: I2C0 to RTC & Qwiic / STEMMA QT (SDA, SCL)\n- GPIO37..GPIO40: MicroSD (SPI1: SCK, MOSI, MISO, CS)\n- GPIO41, GPIO42: RS-485 (TX, RX, DE/RE direction)\n- GPIO43..GPIO47: Status LEDs, Jumper inputs\n\nQSPI Flash Memory:\n- U7: Winbond W25Q128JVSIQ (16MB / 128Mbit SPI/QSPI NOR Flash, SOIC-8 208mil)\n- Connected to RP2350 QSPI pins with 10k pullups on CSn\n\nOscillator & Power:\n- Y1: 12.000 MHz SMD 3225 Crystal + 2x 15pF C0G capacitors\n- Core DVDD (1.1V): Internal regulator with 1uF + 100nF decoupling\n- IOVDD (3.3V): Decoupled with 100nF per VDD pin + 10uF bulk\n\nUSB-C Programming & Diagnostics:\n- J1: USB4110 / Type-C 16-pin connector with 5.1k pulldowns on CC1/CC2\n- USBLC6-2SC6 ESD protection on D+/D- + 27 ohm series resistors\n- BOOTSEL & RESET tactile buttons for UF2 drag-and-drop firmware upgrades"
+		(at 30 30 0)
+		(effects (font (size 2.2 2.2)) (justify left top))
+		(uuid "b7110444-6653-4587-8ffe-3d35df068f5b")
+	)
+
+)

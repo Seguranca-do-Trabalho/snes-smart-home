@@ -1,0 +1,20 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "1d5795bc-0c04-4ee1-aed1-9e5356915cff")
+	(paper "A3")
+	(title_block
+		(title "SNES 62-Pin Cartridge Connector & SuperCIC")
+		(date "2026-09-10")
+		(rev "V1.0")
+		(company "SNES SmartHome Project")
+	)
+
+	(text "SHEET 1: SNES 62-PIN CARTRIDGE CONNECTOR & SUPERCIC\n\nPinout Specifications:\n- Pitch: 2.50mm Metric Pitch (DO NOT USE 2.54mm!)\n- PCB Thickness: 1.20mm ENIG with 30-degree Beveling\n\nSignals:\n- Power: Pins 27, 58 = +5V_SNES, Pins 5, 36 = GND\n- Data: Pins 19-22 = SNES_D0..SNES_D3, Pins 50-53 = SNES_D4..SNES_D7\n- Address: Pins 17..6 = SNES_A0..SNES_A11, Pins 37..40 = SNES_A12..SNES_A15\n- Bank Address: Pins 41..48 = SNES_A16..SNES_A23\n- Control: Pin 23 = /RD, Pin 54 = /WR, Pin 49 = /ROMSEL (/CART), Pin 26 = /RESET, Pin 57 = PHI2, Pin 18 = /IRQ\n\nLockout Bypass:\n- U1: PIC12F629-I/SN running open-source SuperCIC firmware\n  Pin 1: VDD (+5V_SNES), Pin 8: GND\n  Pin 3: CIC_CLK (Edge Pin 56)\n  Pin 4: CIC_RST (Edge Pin 25)\n  Pin 5: CIC_DAT1 (Edge Pin 24)\n  Pin 6: CIC_DAT2 (Edge Pin 55)\n  Pin 7: Mode/Status LED / Region select\n\nDecoupling & Protection:\n- C1: 100nF 0603 X7R on U1 VDD\n- D1, D2: SRV05-4 / USBLC6 TVS protection diode arrays on data & control bus"
+		(at 30 30 0)
+		(effects (font (size 2.2 2.2)) (justify left top))
+		(uuid "3967f9f6-6a90-491b-aef8-61712043baf4")
+	)
+
+)

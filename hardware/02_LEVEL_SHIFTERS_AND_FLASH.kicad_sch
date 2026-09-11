@@ -1,0 +1,20 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "d4686579-7d7c-421d-8970-8bb2457737b8")
+	(paper "A3")
+	(title_block
+		(title "Level Shifters & Parallel Flash ROM")
+		(date "2026-09-10")
+		(rev "V1.0")
+		(company "SNES SmartHome Project")
+	)
+
+	(text "SHEET 2: VOLTAGE LEVEL SHIFTERS & BOOT FLASH ROM\n\nLevel Shifting Architecture (5V TTL <-> 3.3V CMOS):\n1. Address & Control Bus (SNES -> Cartridge, Unidirectional 5V -> 3.3V):\n   - U2: 74LVC541APW (TSSOP-20) for SNES_A0..SNES_A7, /RD, /WR\n   - U3: 74LVC541APW (TSSOP-20) for SNES_A8..SNES_A15, /ROMSEL, PHI2\n   - Inputs are 5V tolerant when powered at 3.3V. Propagation delay: ~3.0 ns\n   - /OE1, /OE2 tied to GND (always enabled)\n\n2. Bidirectional Data Bus (SNES <-> Cartridge, 5V <-> 3.3V):\n   - U4: SN74LVC8T245PWR (TSSOP-24 Dual-Supply Bus Transceiver)\n   - VCCA = +5V_SNES, VCCB = +3.3V\n   - Port A = SNES_D0..SNES_D7, Port B = BUS_D0..BUS_D7\n   - DIR controlled by SNES_/RD: LOW = Read (B -> A), HIGH = Write (A -> B)\n   - /OE controlled by Cartridge Address Decoder Logic (Active on /ROMSEL or SRAM/Mailbox select)\n\n3. Boot Flash ROM (Parallel NOR Flash):\n   - U5: SST39VF040-70-4C-WHE (512K x 8, TSOP-32, 70ns access time)\n   - Address inputs connected to buffered 3.3V address bus (BUS_A0..BUS_A18)\n   - Data outputs connected to buffered 3.3V data bus (BUS_D0..BUS_D7)\n   - /CE connected to /ROMSEL_3V3\n   - /OE connected to /RD_3V3\n   - /WE pulled to 3.3V via 10k resistor (hardware write protected, jumperable for in-system update)"
+		(at 30 30 0)
+		(effects (font (size 2.2 2.2)) (justify left top))
+		(uuid "b686156f-ec90-48c5-9e1b-0c54d7daad1e")
+	)
+
+)

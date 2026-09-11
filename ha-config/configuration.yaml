@@ -1,0 +1,63 @@
+default_config:
+
+input_boolean:
+  sala_luz:
+    name: Sala Luz Base
+    initial: true
+  porta_garagem_teste:
+    name: Porta Garagem Base
+    initial: false
+
+input_number:
+  temperatura_teste:
+    name: Temperatura Teste
+    min: 0
+    max: 50
+    step: 0.1
+    initial: 23.8
+  umidade_teste:
+    name: Umidade Teste
+    min: 0
+    max: 100
+    step: 1
+    initial: 54
+
+template:
+  - light:
+      - name: "Sala Light"
+        unique_id: snes_sala_light
+        state: "{{ is_state('input_boolean.sala_luz', 'on') }}"
+        turn_on:
+          action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.sala_luz
+        turn_off:
+          action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.sala_luz
+
+  - cover:
+      - name: "Garagem Door"
+        unique_id: snes_garage_door
+        device_class: garage
+        state: "{{ is_state('input_boolean.porta_garagem_teste', 'off') }}"
+        open_cover:
+          action: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.porta_garagem_teste
+        close_cover:
+          action: input_boolean.turn_on
+          target:
+            entity_id: input_boolean.porta_garagem_teste
+
+sensor:
+  - platform: template
+    sensors:
+      temperatura_teste_sensor:
+        friendly_name: Temperatura Teste
+        unit_of_measurement: "°C"
+        value_template: "{{ states('input_number.temperatura_teste') }}"
+      umidade_teste_sensor:
+        friendly_name: Umidade Teste
+        unit_of_measurement: "%"
+        value_template: "{{ states('input_number.umidade_teste') }}"

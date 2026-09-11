@@ -1,0 +1,23 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: snes-ha
+    restart: unless-stopped
+    ports: ["8123:8123"]
+    volumes: ["./ha-config:/config"]
+    environment: ["TZ=America/Sao_Paulo"]
+  bridge:
+    image: python:3.13-slim
+    container_name: snes-ha-bridge
+    restart: unless-stopped
+    depends_on: [homeassistant]
+    working_dir: /app
+    volumes: ["./bridge:/app"]
+    environment:
+      HA_URL: http://homeassistant:8123
+      HA_TOKEN: ${HA_TOKEN}
+      BRIDGE_HTTP_PORT: 8790
+      BRIDGE_TCP_PORT: 8791
+      POLL_SECONDS: 2
+    command: ["python","ha_bridge.py"]
+    ports: ["8790:8790","8791:8791"]

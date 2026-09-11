@@ -1,0 +1,20 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "01b1845f-4ca9-4572-b90d-086b3cda3965")
+	(paper "A3")
+	(title_block
+		(title "ESP32-C6 Wi-Fi 6 / IoT Coprocessor")
+		(date "2026-09-10")
+		(rev "V1.0")
+		(company "SNES SmartHome Project")
+	)
+
+	(text "SHEET 4: ESP32-C6 WI-FI 6 / BLE / THREAD COPROCESSOR\n\nModule: Espressif ESP32-C6-MINI-1 (or ESP32-C6-WROOM-1)\n- 32-bit RISC-V single-core @ 160MHz, 512KB SRAM, 4MB/8MB Flash\n- Wi-Fi 6 (2.4 GHz 802.11ax), Bluetooth 5 (LE), IEEE 802.15.4 (Thread/Zigbee)\n- Built-in certified PCB antenna (placed at the top edge of cartridge with keepout)\n\nRole in SNES Smart Home:\n- Connects to local Wi-Fi and establishes Home Assistant session\n- Handles TLS encryption, JSON / WebSocket / REST parsing, or MQTT\n- Translates Home Assistant states into compact binary protocol (SH 01 + CRC16)\n- Pushes snapshot to RP2350 mailbox via high-speed SPI / UART\n- Receives command packets from RP2350 and dispatches HA service calls\n\nInterface to RP2350:\n- SPI: ESP_MOSI (GPIO19), ESP_MISO (GPIO20), ESP_SCK (GPIO21), ESP_CS (GPIO18)\n- UART: ESP_TX (GPIO16) -> RP2350_RX, ESP_RX (GPIO17) <- RP2350_TX\n- Handshake IRQ: ESP_INT (GPIO22) to alert RP2350 of new states\n\nPower & Decoupling:\n- 3.3V with 10uF ceramic + 100nF ceramic + bulk 47uF tantalum nearby\n- CHIP_PU with 10k pullup and 1uF delay capacitor for clean power-on reset\n- Tactile buttons: BOOT (GPIO9) and RESET (CHIP_PU) for firmware flashing\n- Onboard Status Indicator: WS2812B / SK6812MINI addressable RGB LED"
+		(at 30 30 0)
+		(effects (font (size 2.2 2.2)) (justify left top))
+		(uuid "70ec06a4-451a-4535-a25f-7f3581e0a215")
+	)
+
+)
