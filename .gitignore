@@ -8,6 +8,10 @@
 *.log
 linkfile
 hdr.asm
+soundbank.asm
+soundbank.bnk
+soundbank.h
+soundbank.obj
 assets/*.pic
 assets/*.pal
 assets/*.map

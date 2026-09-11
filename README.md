@@ -55,17 +55,22 @@ snes-smart-home/
 ├── snes/                      # Código-fonte da ROM SNES (C + ASM)
 │   ├── src/
 │   │   ├── main.c             # Loop principal do jogo e vblank
-│   │   ├── ui.c               # Renderização de tela, paginação e sprites
+│   │   ├── ui.c               # Renderização de tela, 8 paletas CGRAM, paginação e sprites
 │   │   ├── ui.h
+│   │   ├── audio.c            # Driver de som SPC700 (efeitos de menu, toggle e chime)
+│   │   ├── audio.h
 │   │   ├── cartio.c           # I/O do cartucho (SRAM mailbox + fallback sim)
 │   │   ├── cartio.h
-│   │   └── config.h           # Configurações de exibição e limites
+│   │   └── config.h           # Configurações de exibição, limites e fallback SIMULATOR
 │   ├── assets/                # Bitmaps convertidos (fonte e ícones)
 │   │   ├── font.bmp           # Fonte 8x8 bitmap
-│   │   └── icons.bmp          # Sprites 16x16 dos domínios (luz, porta, sensor)
+│   │   ├── icons.bmp          # 20 Sprites 16x16 dos domínios (lâmpada, porta, fan, etc.)
+│   │   └── make_icons.py      # Gerador procedural da folha de sprites 16x320
+│   ├── res/                   # Recursos de áudio para smconv
+│   │   └── soundbank.it       # Tracker ImpulseTracker com samples e SFX
 │   ├── data.asm               # Inclusão dos dados gráficos na ROM
-│   ├── Makefile               # Script de build PVSnesLib 4.6.0
-│   └── super_home.sfc         # ROM compilada de 256 KB
+│   ├── Makefile               # Script de build PVSnesLib 4.6.0 com smconv
+│   └── super_home.sfc         # ROM compilada de 256 KB (LoROM SlowROM)
 │
 ├── hardware/                  # Projeto Eletrônico Completo KiCad 10
 │   ├── snes_smarthome_cartridge.kicad_pro   # Projeto KiCad
@@ -124,6 +129,39 @@ flatpak run com.snes9x.Snes9x snes/super_home.sfc
 flatpak run dev.bsnes.bsnes snes/super_home.sfc
 ```
 No emulador sem o hardware físico do RP2350 conectado, o cartucho detecta a ausência da assinatura `SH 01` no endereço de SRAM e ativa o modo **SIMULATOR**, permitindo navegar entre páginas com `L` e `R`, selecionar entidades com o direcional e alternar estados com o botão `A`.
+
+### Recursos Audiovisuais da ROM
+
+#### 1. Sprites e Animações Pixel Art (16×16 OAM)
+A folha de sprites possui 20 ícones temáticos (`snes/assets/icons.bmp` gerados via `make_icons.py`):
+- **Luz (`light`):** Lâmpada incandescente apagada vs. acesa com raios radiantes dourados.
+- **Interruptor (`switch`):** Rocker switch industrial com LED indicador verde.
+- **Garagem / Portão (`cover`):** Portão fechado vs. aberto com carro esportivo retrô estilizado.
+- **Fechadura (`lock`):** Cadeado fechado (trancado) vs. manilha aberta (destrancado).
+- **Ventilador (`fan`):** Hélice de 4 pás que **gira em tempo real** alternando entre 0° e 45° quando ligado.
+- **Climatização (`climate`):** Floco de neve para refrigeração / frio vs. chama alaranjada para aquecimento (> 24°C).
+- **Sensores (`sensor`):** Gota azul para umidade (%) vs. raio de energia para potência/volts vs. termômetro.
+- **Segurança (`binary_sensor`):** Escudo verde em estado seguro vs. triângulo de advertência em alerta.
+- **Mídia (`media_player`):** Alto-falante em pausa vs. equalizador com notas musicais quando em reprodução.
+- **Cursor Dinâmico:** Seta indicadora com animação de 2 frames e efeito bounce senoidal à esquerda do dispositivo selecionado.
+
+#### 2. Efeitos Sonoros SPC700 (Sony DSP)
+O cartucho integra um soundbank Tracker (`snes/res/soundbank.it` compilado via `smconv` no banco de ROM 5):
+- `UP` / `DOWN`: Marimba percussiva nítida ao mover o cursor.
+- `L` / `R`: Clique acústico tátil ao mudar de página.
+- `A` (Ligar): Chime melódico ascendente ao acionar/abrir um dispositivo.
+- `A` (Desligar): Tap em tom grave ao desativar/fechar.
+- `B` (Polling): Chime suave de sincronização com o Home Assistant.
+
+#### 3. Paletas de Texto Coloridas (BG Mode 1 - 8 Paletas CGRAM)
+Os textos dos dispositivos recebem cores semânticas conforme tipo e estado:
+- **Ouro (`PAL_GOLD`):** Título principal, item selecionado e indicador de página.
+- **Ciano Elétrico (`PAL_CYAN`):** Temperatura fria (< 21°C) e umidade (%).
+- **Laranja Fogo (`PAL_ORANGE`):** Temperatura quente (> 25°C) e alertas de sensores.
+- **Verde Esmeralda (`PAL_GREEN`):** Estados `"ON"`, `"OPEN"`, `"UNLKD"` e conforto térmico (21°C a 25°C).
+- **Cinza Neutro (`PAL_GRAY`):** Estados desligados (`"OFF"`, `"CLSD"`, `"LOCKD"`).
+- **Roxo Neon (`PAL_PURPLE`):** Dispositivos de mídia (`"PLAY"`).
+- **Âmbar (`PAL_AMBER`):** Contadores de dispositivos e avisos.
 
 ---
 

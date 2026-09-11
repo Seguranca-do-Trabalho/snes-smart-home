@@ -8,4 +8,5 @@
 #define CART_PROTOCOL_VERSION 1
 #define UI_ROWS_PER_PAGE 7
 #define UI_REFRESH_FRAMES 30
+#define SIMULATOR 1
 #endif

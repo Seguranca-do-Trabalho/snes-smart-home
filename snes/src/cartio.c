@@ -7,7 +7,7 @@ u8 entity_count = 0;
 #define CART_MAILBOX_BASE 0x700000
 
 #ifdef SIMULATOR
-static void sim_add(u8 domain, const char *id, const char *name, const char *state, const char *value, u8 features) {
+static void sim_add(u8 domain, u8 state_code, const char *id, const char *name, const char *state, const char *value, u8 features, u16 num_val) {
     Entity *e;
     if (entity_count >= MAX_ENTITIES)
         return;
@@ -15,7 +15,9 @@ static void sim_add(u8 domain, const char *id, const char *name, const char *sta
     memset(e, 0, sizeof(Entity));
     e->used = 1;
     e->domain = domain;
+    e->state_code = state_code;
     e->features = features;
+    e->numeric_value = num_val;
     strncpy(e->entity_id, id, sizeof(e->entity_id) - 1);
     strncpy(e->name, name, MAX_NAME_LEN);
     strncpy(e->state, state, MAX_STATE_LEN);
@@ -67,6 +69,10 @@ void cartio_refresh(void) {
                     strcpy(e->state, "OPEN");
                 else if (e->domain == ENTITY_LOCK)
                     strcpy(e->state, "UNLKD");
+                else if (e->domain == ENTITY_MEDIA)
+                    strcpy(e->state, "PLAY");
+                else if (e->domain == ENTITY_BINARY_SENSOR)
+                    strcpy(e->state, "DETECT");
                 else
                     strcpy(e->state, "ON");
             } else if (e->state_code == 0) {
@@ -74,6 +80,10 @@ void cartio_refresh(void) {
                     strcpy(e->state, "CLSD");
                 else if (e->domain == ENTITY_LOCK)
                     strcpy(e->state, "LOCKD");
+                else if (e->domain == ENTITY_MEDIA)
+                    strcpy(e->state, "PAUSE");
+                else if (e->domain == ENTITY_BINARY_SENSOR)
+                    strcpy(e->state, "CLEAR");
                 else
                     strcpy(e->state, "OFF");
             } else {
@@ -93,12 +103,20 @@ void cartio_refresh(void) {
     }
 
 #ifdef SIMULATOR
-    entity_count = 0;
-    sim_add(ENTITY_LIGHT, "light.sala", "Sala Light", "ON", "", 0x03);
-    sim_add(ENTITY_COVER, "cover.garagem", "Garagem Door", "CLSD", "0", 0x45);
-    sim_add(ENTITY_SENSOR, "sensor.temperatura", "Temperatura", "23.8", "C", 0x20);
-    sim_add(ENTITY_SENSOR, "sensor.umidade", "Umidade", "54.0", "%", 0x20);
-    sim_add(ENTITY_SWITCH, "switch.cafeteira", "Cafeteira", "OFF", "", 0x01);
+    if (entity_count == 0) {
+        /* Populate rich simulated smart home environment */
+        sim_add(ENTITY_LIGHT, 1, "light.sala", "Sala Light", "ON", "", 0x03, 0xFFFF);
+        sim_add(ENTITY_COVER, 0, "cover.garagem", "Porta Garagem", "CLSD", "0", 0x45, 0);
+        sim_add(ENTITY_CLIMATE, 1, "climate.ar_sala", "Ar Condic.", "21.5", "C", 0x20, 2150);
+        sim_add(ENTITY_SENSOR, 2, "sensor.temp_ext", "Temp. Externa", "28.6", "C", 0x20, 2860);
+        sim_add(ENTITY_SENSOR, 2, "sensor.quarto_bebe", "Quarto Bebe", "19.4", "C", 0x20, 1940);
+        sim_add(ENTITY_SENSOR, 2, "sensor.umidade", "Umidade Sala", "62.0", "%", 0x20, 6200);
+        sim_add(ENTITY_FAN, 1, "fan.teto", "Ventilador", "ON", "", 0x01, 0xFFFF);
+        sim_add(ENTITY_LOCK, 0, "lock.porta_social", "Fechadura", "LOCKD", "", 0x08, 0xFFFF);
+        sim_add(ENTITY_MEDIA, 1, "media_player.sala", "Spotify Sala", "PLAY", "", 0x01, 0xFFFF);
+        sim_add(ENTITY_BINARY_SENSOR, 1, "binary_sensor.alarme", "Alarme Gar.", "DETECT", "", 0x01, 0xFFFF);
+        sim_add(ENTITY_SWITCH, 0, "switch.cafeteira", "Cafeteira", "OFF", "", 0x01, 0xFFFF);
+    }
 #endif
 }
 
@@ -129,19 +147,54 @@ u8 cartio_command(u8 index, u8 command) {
 
 #ifdef SIMULATOR
     if (command == 1 && (e->domain == ENTITY_LIGHT || e->domain == ENTITY_SWITCH || e->domain == ENTITY_FAN)) {
-        if (strcmp(e->state, "ON") == 0)
+        if (e->state_code == 1) {
+            e->state_code = 0;
             strcpy(e->state, "OFF");
-        else
+        } else {
+            e->state_code = 1;
             strcpy(e->state, "ON");
+        }
         return 1;
     }
     if (command == 2 && e->domain == ENTITY_COVER) {
-        if (strcmp(e->state, "CLSD") == 0) {
-            strcpy(e->state, "OPEN");
-            strcpy(e->value, "100");
-        } else {
+        if (e->state_code == 1) {
+            e->state_code = 0;
             strcpy(e->state, "CLSD");
             strcpy(e->value, "0");
+        } else {
+            e->state_code = 1;
+            strcpy(e->state, "OPEN");
+            strcpy(e->value, "100");
+        }
+        return 1;
+    }
+    if (command == 3 && e->domain == ENTITY_LOCK) {
+        if (e->state_code == 1) {
+            e->state_code = 0;
+            strcpy(e->state, "LOCKD");
+        } else {
+            e->state_code = 1;
+            strcpy(e->state, "UNLKD");
+        }
+        return 1;
+    }
+    if (command == 4 && e->domain == ENTITY_MEDIA) {
+        if (e->state_code == 1) {
+            e->state_code = 0;
+            strcpy(e->state, "PAUSE");
+        } else {
+            e->state_code = 1;
+            strcpy(e->state, "PLAY");
+        }
+        return 1;
+    }
+    if (command == 5 && e->domain == ENTITY_CLIMATE) {
+        if (e->state_code == 1) {
+            e->state_code = 0;
+            strcpy(e->state, "OFF");
+        } else {
+            e->state_code = 1;
+            strcpy(e->state, "21.5");
         }
         return 1;
     }
